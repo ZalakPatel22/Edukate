@@ -1,0 +1,249 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$securityDataDir = __DIR__ . '/data';
+if (!file_exists($securityDataDir)) {
+    mkdir($securityDataDir, 0755, true);
+}
+
+function security_file_path(string $filename): string
+{
+    return __DIR__ . '/data/' . $filename;
+}
+
+function read_json_file(string $filename, $default = [])
+{
+    $path = security_file_path($filename);
+    if (!file_exists($path)) {
+        return $default;
+    }
+    $content = file_get_contents($path);
+    $data = json_decode($content, true);
+    return is_array($data) ? $data : $default;
+}
+
+function write_json_file(string $filename, $data): void
+{
+    file_put_contents(security_file_path($filename), json_encode($data, JSON_PRETTY_PRINT));
+}
+
+function load_admin_account(): array
+{
+    return read_json_file('admin_account.json', []);
+}
+
+function save_admin_account(array $account): void
+{
+    write_json_file('admin_account.json', $account);
+}
+
+function load_security_settings(): array
+{
+    $defaults = [
+        'login_history_enabled' => true,
+        'captcha_enabled' => true,
+        'otp_enabled' => false,
+        'session_timeout' => 30,
+        'activity_logs_enabled' => true,
+    ];
+    $settings = read_json_file('security_settings.json', []);
+    return array_merge($defaults, $settings);
+}
+
+function save_security_settings(array $settings): void
+{
+    $settings['login_history_enabled'] = isset($settings['login_history_enabled']) ? (bool)$settings['login_history_enabled'] : false;
+    $settings['captcha_enabled'] = isset($settings['captcha_enabled']) ? (bool)$settings['captcha_enabled'] : false;
+    $settings['otp_enabled'] = isset($settings['otp_enabled']) ? (bool)$settings['otp_enabled'] : false;
+    $settings['session_timeout'] = max(5, intval($settings['session_timeout'] ?? 30));
+    $settings['activity_logs_enabled'] = isset($settings['activity_logs_enabled']) ? (bool)$settings['activity_logs_enabled'] : false;
+    write_json_file('security_settings.json', $settings);
+}
+
+function log_admin_event(string $message, string $type = 'info'): void
+{
+    $settings = load_security_settings();
+    $history = read_json_file('activity_logs.json', []);
+    array_unshift($history, [
+        'timestamp' => date('Y-m-d H:i:s'),
+        'type' => $type,
+        'message' => $message,
+        'user' => $_SESSION['admin_user'] ?? 'guest',
+    ]);
+    if (count($history) > 100) {
+        $history = array_slice($history, 0, 100);
+    }
+    if ($settings['activity_logs_enabled']) {
+        write_json_file('activity_logs.json', $history);
+    }
+}
+
+function log_login_attempt(string $username, bool $success, string $reason = ''): void
+{
+    $settings = load_security_settings();
+    $history = read_json_file('login_history.json', []);
+    array_unshift($history, [
+        'timestamp' => date('Y-m-d H:i:s'),
+        'username' => $username,
+        'success' => $success,
+        'reason' => $reason,
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
+    ]);
+    if (count($history) > 100) {
+        $history = array_slice($history, 0, 100);
+    }
+    if ($settings['login_history_enabled']) {
+        write_json_file('login_history.json', $history);
+    }
+}
+
+function load_login_history(int $limit = 50): array
+{
+    $history = read_json_file('login_history.json', []);
+    return array_slice($history, 0, $limit);
+}
+
+function load_activity_logs(int $limit = 50): array
+{
+    $history = read_json_file('activity_logs.json', []);
+    return array_slice($history, 0, $limit);
+}
+
+function generate_captcha_question(): string
+{
+    $a = rand(1, 9);
+    $b = rand(1, 9);
+    $_SESSION['captcha_answer'] = $a + $b;
+    return "$a + $b = ?";
+}
+
+function validate_captcha_answer($answer): bool
+{
+    return isset($_SESSION['captcha_answer']) && intval($answer) === intval($_SESSION['captcha_answer']);
+}
+
+function generate_otp_code(): string
+{
+    $code = str_pad((string)rand(0, 999999), 6, '0', STR_PAD_LEFT);
+    $_SESSION['otp_code'] = $code;
+    $_SESSION['otp_expires'] = time() + 300;
+    return $code;
+}
+
+function validate_otp_code(string $code): bool
+{
+    return isset($_SESSION['otp_code'], $_SESSION['otp_expires'])
+        && time() <= $_SESSION['otp_expires']
+        && trim($code) === $_SESSION['otp_code'];
+}
+
+function clear_otp_state(): void
+{
+    unset($_SESSION['otp_code'], $_SESSION['otp_expires'], $_SESSION['otp_stage_user']);
+}
+
+function enforce_admin_session_timeout(): void
+{
+    if (isset($_SESSION['admin_user'])) {
+        $settings = load_security_settings();
+        $timeoutMinutes = max(5, intval($settings['session_timeout'] ?? 30));
+        $lastActivity = $_SESSION['last_activity'] ?? time();
+        if (time() - $lastActivity > $timeoutMinutes * 60) {
+            log_admin_event('Session timed out for ' . $_SESSION['admin_user'], 'warning');
+            $_SESSION = [];
+            session_destroy();
+            header('Location: index.php?timeout=1');
+            exit;
+        }
+        $_SESSION['last_activity'] = time();
+    }
+}
+
+function is_otp_step(): bool
+{
+    return isset($_SESSION['otp_stage_user']) && !isset($_SESSION['admin_user']);
+}
+
+function security_setting_enabled(string $key): bool
+{
+    $settings = load_security_settings();
+    return !empty($settings[$key]);
+}
+
+function load_certificates(int $limit = 100): array
+{
+    $certificates = read_json_file('certificates.json', []);
+    return array_slice($certificates, 0, $limit);
+}
+
+function save_certificates(array $certificates): void
+{
+    write_json_file('certificates.json', $certificates);
+}
+
+function generate_certificate_code(): string
+{
+    return 'CERT-' . strtoupper(bin2hex(random_bytes(4)));
+}
+
+function create_certificate(array $data): array
+{
+    $certificates = read_json_file('certificates.json', []);
+    $certificateId = generate_certificate_code();
+    $certificate = [
+        'id' => $certificateId,
+        'name' => trim($data['name'] ?? ''),
+        'course' => trim($data['course'] ?? ''),
+        'issued_at' => date('Y-m-d H:i:s'),
+        'issued_by' => $_SESSION['admin_user'] ?? 'admin',
+        'status' => 'issued',
+        'verified' => false,
+    ];
+    array_unshift($certificates, $certificate);
+    save_certificates($certificates);
+    log_admin_event('Certificate generated: ' . $certificateId, 'info');
+    return $certificate;
+}
+
+function find_certificate_by_id(string $certificateId): ?array
+{
+    $certificates = read_json_file('certificates.json', []);
+    foreach ($certificates as $certificate) {
+        if ($certificate['id'] === $certificateId) {
+            return $certificate;
+        }
+    }
+    return null;
+}
+
+function verify_certificate(string $certificateId): bool
+{
+    $certificates = read_json_file('certificates.json', []);
+    foreach ($certificates as &$certificate) {
+        if ($certificate['id'] === $certificateId) {
+            $certificate['verified'] = true;
+            save_certificates($certificates);
+            log_admin_event('Certificate verified: ' . $certificateId, 'success');
+            return true;
+        }
+    }
+    return false;
+}
+
+function download_certificate_file(array $certificate): void
+{
+    $filename = $certificate['id'] . '_certificate.txt';
+    header('Content-Type: text/plain');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    echo "Edukate Certificate\n";
+    echo "Certificate ID: " . $certificate['id'] . "\n";
+    echo "Recipient: " . $certificate['name'] . "\n";
+    echo "Course: " . $certificate['course'] . "\n";
+    echo "Issued At: " . $certificate['issued_at'] . "\n";
+    echo "Issued By: " . $certificate['issued_by'] . "\n";
+    echo "Verified: " . ($certificate['verified'] ? 'Yes' : 'No') . "\n";
+    exit;
+}

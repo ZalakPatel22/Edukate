@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-08-04 20:38:08",
+        "type": "success",
+        "message": "Admin logged in: pari22@gmail.com",
+        "user": "pari22@gmail.com"
+    },
+    {
+        "timestamp": "2026-08-02 19:58:38",
+        "type": "success",
+        "message": "Admin logged in: pari22@gmail.com",
+        "user": "pari22@gmail.com"
+    },
+    {
+        "timestamp": "2026-08-02 19:57:40",
+        "type": "info",
+        "message": "Admin logged out: admin",
+        "user": "admin"
+    },
+    {
+        "timestamp": "2026-08-02 19:56:35",
+        "type": "success",
+        "message": "Admin logged in: admin",
+        "user": "admin"
+    }
+]
