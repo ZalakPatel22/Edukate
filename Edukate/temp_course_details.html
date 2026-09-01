@@ -1,6 +1,4 @@
-from pathlib import Path
-path = Path(r'C:/xampp/htdocs/Edukate/Edukate/course-details.html')
-content = '''<?html
+<?html
 session_start();
 require_once __DIR__ . '/courses-data.html';
 
@@ -165,7 +163,3 @@ $course = $courses[$courseKey];
 </body>
 
 </html>
-'''
-path.write_text(content, encoding='utf-8')
-print('wrote', path)
-print(path.read_text(encoding='utf-8').splitlines()[:10])

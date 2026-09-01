@@ -75,13 +75,13 @@
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword' }			// keyword
 			];
 
-		this.forHtmlScript(SyntaxHighlighter.regexLib.phpScriptTags);
+		this.forHtmlScript(SyntaxHighlighter.regexLib.htmlScriptTags);
 	};
 
 	Brush.prototype	= new SyntaxHighlighter.Highlighter();
-	Brush.aliases	= ['php'];
+	Brush.aliases	= ['html'];
 
-	SyntaxHighlighter.brushes.Php = Brush;
+	SyntaxHighlighter.brushes.html = Brush;
 
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;

@@ -1,0 +1,143 @@
+<?html
+session_start();
+include_once 'security.html';
+if (!isset($_SESSION['admin_user'])) {
+  header('Location: index.html');
+  exit;
+}
+
+$message = '';
+$messageType = 'success';
+
+if (isset($_GET['download'])) {
+  $certificate = find_certificate_by_id(trim($_GET['download']));
+  if ($certificate) {
+    download_certificate_file($certificate);
+  }
+  $message = 'Certificate not found for download.';
+  $messageType = 'error';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['generate_certificate'])) {
+    $name = trim($_POST['student_name'] ?? '');
+    $course = trim($_POST['course_name'] ?? '');
+    if ($name === '' || $course === '') {
+      $message = 'Student name and course name are required.';
+      $messageType = 'error';
+    } else {
+      $certificate = create_certificate(['name' => $name, 'course' => $course]);
+      $message = 'Certificate generated: ' . htmlspecialchars($certificate['id']);
+      $messageType = 'success';
+    }
+  }
+
+  if (isset($_POST['verify_certificate'])) {
+    $certificateId = trim($_POST['certificate_id'] ?? '');
+    if ($certificateId === '') {
+      $message = 'Certificate ID is required for verification.';
+      $messageType = 'error';
+    } elseif (verify_certificate($certificateId)) {
+      $message = 'Certificate verified successfully: ' . htmlspecialchars($certificateId);
+      $messageType = 'success';
+    } else {
+      $message = 'Certificate not found or invalid: ' . htmlspecialchars($certificateId);
+      $messageType = 'error';
+    }
+  }
+}
+
+$certificates = load_certificates(100);
+?>
+<?html include('header.html'); ?>
+
+<?html if (!empty($message)) : ?>
+  <div class="admin-alert <?= $messageType === 'success' ? 'success' : 'error' ?>">
+    <?= htmlspecialchars($message) ?>
+  </div>
+<?html endif; ?>
+
+<div class="row admin-grid-2">
+  <div>
+    <div class="admin-panel">
+      <div class="admin-panel-head">
+        <div>
+          <h3>Generate Certificate</h3>
+          <p>Create a new completion certificate for a student.</p>
+        </div>
+      </div>
+      <form method="post">
+        <div class="form-group">
+          <label for="student_name">Student Name</label>
+          <input type="text" id="student_name" name="student_name" class="form-control" placeholder="Enter student name" required>
+        </div>
+        <div class="form-group">
+          <label for="course_name">Course Name</label>
+          <input type="text" id="course_name" name="course_name" class="form-control" placeholder="Enter course name" required>
+        </div>
+        <button type="submit" name="generate_certificate" class="admin-btn">Generate Certificate</button>
+      </form>
+    </div>
+
+    <div class="admin-panel" style="margin-top: 24px;">
+      <div class="admin-panel-head">
+        <div>
+          <h3>Verify Certificate</h3>
+          <p>Confirm that a certificate ID is valid.</p>
+        </div>
+      </div>
+      <form method="post">
+        <div class="form-group">
+          <label for="certificate_id">Certificate ID</label>
+          <input type="text" id="certificate_id" name="certificate_id" class="form-control" placeholder="Enter certificate ID" required>
+        </div>
+        <button type="submit" name="verify_certificate" class="admin-btn">Verify Certificate</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <div class="admin-panel">
+      <div class="admin-panel-head">
+        <div>
+          <h3>Issued Certificates</h3>
+          <p>View the list of generated certificates and download them.</p>
+        </div>
+      </div>
+      <table class="security-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Issued At</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?html if (empty($certificates)) : ?>
+            <tr>
+              <td colspan="6">No certificates generated yet.</td>
+            </tr>
+          <?html else : ?>
+            <?html foreach ($certificates as $certificate) : ?>
+              <tr>
+                <td><?= htmlspecialchars($certificate['id']) ?></td>
+                <td><?= htmlspecialchars($certificate['name']) ?></td>
+                <td><?= htmlspecialchars($certificate['course']) ?></td>
+                <td><?= htmlspecialchars($certificate['issued_at']) ?></td>
+                <td><span class="status-pill <?= $certificate['verified'] ? 'success' : 'pending' ?>"><?= $certificate['verified'] ? 'Verified' : 'Issued' ?></span></td>
+                <td>
+                  <a href="certificates.html?download=<?= urlencode($certificate['id']) ?>" class="admin-btn" style="padding: 6px 12px; font-size: 13px;">Download</a>
+                </td>
+              </tr>
+            <?html endforeach; ?>
+          <?html endif; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<?html include('footer.html'); ?>
