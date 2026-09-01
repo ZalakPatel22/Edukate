@@ -12,10 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="shortcut icon" href="img/fav.png" />
     <meta name="author" content="colorlib" />
-    <meta name="description" content="<?= htmlspecialchars($course['description']) ?>" />
-    <meta name="keywords" content="<?= htmlspecialchars($course['title']) ?>, Edukate, course" />
+    <meta name="description" content="Learn Web Development from scratch" />
+    <meta name="keywords" content="Web Development, Edukate, course" />
     <meta charset="UTF-8" />
-    <title>Edukate - <?= htmlspecialchars($course['title']) ?></title>
+    <title>Edukate - Web Development</title>
 
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto:400,400i,500,700" rel="stylesheet" />
     <link rel="stylesheet" href="css/linearicons.css" />
@@ -56,7 +56,61 @@
 </head>
 
 <body>
-    <?html include('header.html'); ?>
+    <header class="default-header">
+        <nav class="navbar navbar-expand-lg  navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <h2 style="color:azure;">Edukate</h2>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="faculty.html">Faculty</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">AI</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="ai.html">Overview</a>
+                                <a class="dropdown-item" href="ai-chatbot.html">Chatbot</a>
+                                <a class="dropdown-item" href="ai-recommendations.html">Recommendations</a>
+                                <a class="dropdown-item" href="ai-quiz.html">Quiz Generator</a>
+                                <a class="dropdown-item" href="ai-notes.html">Note Summary</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Blog</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="blog-home.html">Blog Home</a>
+                                <a class="dropdown-item" href="blog-single.html">Blog Details</a>
+                            </div>
+                        </li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li>
+                            <button class="search">
+                                <span class="lnr lnr-magnifier" id="search"></span>
+                            </button>
+                        </li>
+                        <li><a href="profile.html" title="Profile"><span class="lnr lnr-user"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="search-input" id="search-input-box">
+            <div class="container">
+                <form class="d-flex justify-content-between">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search Here" />
+                    <button type="submit" class="btn"></button>
+                    <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
 
     <section class="banner-area">
         <div class="container">
@@ -70,7 +124,7 @@
                             <i class="lnr lnr-arrow-right"></i>
                             <a href="courses.html">Courses</a>
                             <i class="lnr lnr-arrow-right"></i>
-                            <a href="course-details.html?course=<?= urlencode($courseKey) ?>"><?= htmlspecialchars($course['title']) ?></a>
+                            <a href="course-details.html">Web Development</a>
                         </span>
                     </div>
                 </div>
@@ -82,14 +136,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
-                    <h1><?= htmlspecialchars($course['title']) ?></h1>
-                    <p><?= htmlspecialchars($course['description']) ?></p>
+                    <h1>Web Development Fundamentals</h1>
+                    <p>Learn the complete roadmap to becoming a professional web developer with hands-on projects and expert guidance.</p>
                     <div class="course-meta">
-                        <p><strong>Duration:</strong> <?= htmlspecialchars($course['duration']) ?></p>
-                        <p><strong>Faculty:</strong> <?= htmlspecialchars($course['faculty']) ?></p>
-                        <p><strong>Fee:</strong> <?= htmlspecialchars($course['fee']) ?></p>
-                        <p><strong>Class Timing:</strong> <?= htmlspecialchars($course['timing']) ?></p>
-                        <p><strong>Seats:</strong> <?= htmlspecialchars($course['seats']) ?></p>
+                        <p><strong>Duration:</strong> 12 Weeks</p>
+                        <p><strong>Faculty:</strong> John Smith</p>
+                        <p><strong>Fee:</strong> $499</p>
+                        <p><strong>Class Timing:</strong> 3 PM - 5 PM IST</p>
+                        <p><strong>Seats:</strong> 25</p>
                     </div>
                     <div class="course-cta">
                         <button id="enrollButton" type="button" class="btn">Enroll Now</button>
@@ -97,7 +151,7 @@
                     <div id="enrollModal" class="modal-overlay" style="display:none;">
                         <div class="modal-box">
                             <h3>Confirm Enrollment</h3>
-                            <p>Are you sure you want to enroll in <strong><?= htmlspecialchars($course['title']) ?></strong>?</p>
+                            <p>Are you sure you want to enroll in <strong>Web Development</strong>?</p>
                             <div class="modal-actions">
                                 <button id="modalYes" type="button" class="btn modal-yes">Yes</button>
                                 <button id="modalNo" type="button" class="btn modal-no">No</button>
@@ -107,7 +161,7 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="course-image">
-                        <img src="<?= htmlspecialchars($course['image']) ?>" alt="<?= htmlspecialchars($course['title']) ?>">
+                        <img src="img/courses/web-dev.jpg" alt="Web Development">
                     </div>
                 </div>
             </div>
@@ -122,7 +176,9 @@
                         <h2>Requirements</h2>
                         <ul>
                             <?html foreach ($course['requirements'] as $requirement): ?>
-                                <li><?= htmlspecialchars($requirement) ?></li>
+                                <li>HTML5 and CSS3 basics</li>
+                                <li>JavaScript fundamentals</li>
+                                <li>React.js framework</li>
                             <?html endforeach; ?>
                         </ul>
                     </div>
@@ -130,7 +186,9 @@
                         <h2>Benefits</h2>
                         <ul>
                             <?html foreach ($course['benefits'] as $benefit): ?>
-                                <li><?= htmlspecialchars($benefit) ?></li>
+                                <li>Build real-world projects</li>
+                                <li>Industry-ready skills</li>
+                                <li>Career support</li>
                             <?html endforeach; ?>
                         </ul>
                     </div>
@@ -138,7 +196,9 @@
                         <h2>Syllabus</h2>
                         <ul>
                             <?html foreach ($course['syllabus'] as $item): ?>
-                                <li><?= htmlspecialchars($item) ?></li>
+                                <li>2 major projects</li>
+                                <li>Weekly assignments</li>
+                                <li>Live coding sessions</li>
                             <?html endforeach; ?>
                         </ul>
                     </div>
@@ -149,8 +209,8 @@
                         <?html foreach ($courses as $key => $details): ?>
                             <?html if ($key === $courseKey) continue; ?>
                             <div style="margin-bottom:18px;">
-                                <h5><?= htmlspecialchars($details['title']) ?></h5>
-                                <a href="course-details.html?course=<?= urlencode($key) ?>">View Details</a>
+                                <h5>Curriculum Overview</h5>
+                                <a href="course-details.html">View Details</a>
                             </div>
                         <?html endforeach; ?>
                     </div>
@@ -186,11 +246,11 @@
         });
 
         modalNo.addEventListener('click', function() {
-            window.location.href = 'course-details.html?course=<?= urlencode($courseKey) ?>';
+            window.location.href = 'course-details.html';
         });
 
         modalYes.addEventListener('click', function() {
-            window.location.href = 'payment.html?course=<?= urlencode($courseKey) ?>';
+            window.location.href = 'payment.html';
         });
     </script>
 </body>

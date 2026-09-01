@@ -1,30 +1,4 @@
-<?html
-session_start();
-
-if (!isset($_SESSION['user'])) {
-  header('Location: signin.html');
-  exit;
-}
-
-$user = $_SESSION['user'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signout'])) {
-  if (session_status() === html_SESSION_ACTIVE) {
-    $_SESSION = [];
-    if (ini_get('session.use_cookies')) {
-      $params = session_get_cookie_params();
-      setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-    }
-    session_destroy();
-  }
-
-  session_start();
-  $_SESSION['auth_message'] = 'You have been signed out. Please sign in again.';
-  $_SESSION['auth_message_type'] = 'error';
-  header('Location: signin.html');
-  exit;
-}
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
 <head>
@@ -49,7 +23,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signout'])) {
 </head>
 
 <body>
-  <?html include('header.html'); ?>
+  <header class="default-header">
+    <nav class="navbar navbar-expand-lg  navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <h2 style="color:azure;">Edukate</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="lnr lnr-menu"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="faculty.html">Faculty</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">AI</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="ai.html">Overview</a>
+                <a class="dropdown-item" href="ai-chatbot.html">Chatbot</a>
+                <a class="dropdown-item" href="ai-recommendations.html">Recommendations</a>
+                <a class="dropdown-item" href="ai-quiz.html">Quiz Generator</a>
+                <a class="dropdown-item" href="ai-notes.html">Note Summary</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Blog</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="blog-home.html">Blog Home</a>
+                <a class="dropdown-item" href="blog-single.html">Blog Details</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li>
+              <button class="search">
+                <span class="lnr lnr-magnifier" id="search"></span>
+              </button>
+            </li>
+            <li><a href="profile.html" title="Profile"><span class="lnr lnr-user"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="search-input" id="search-input-box">
+      <div class="container">
+        <form class="d-flex justify-content-between">
+          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />
+          <button type="submit" class="btn"></button>
+          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>
+        </form>
+      </div>
+    </div>
+  </header>
   <style>
     /* Hide header search input on profile page */
     #search-input-box { display: none !important; }
@@ -67,15 +95,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signout'])) {
             <div class="profile-info">
               <div class="profile-item">
                 <strong>Name</strong>
-                <span><?= htmlspecialchars($user['name']) ?></span>
+                <span>Your Name</span>
               </div>
               <div class="profile-item">
                 <strong>Email</strong>
-                <span><?= htmlspecialchars($user['email']) ?></span>
+                <span>your.email@example.com</span>
               </div>
               <div class="profile-item">
                 <strong>Phone</strong>
-                <span><?= htmlspecialchars($user['phone'] ?? '-') ?></span>
+                <span>+1 (555) 123-4567</span>
               </div>
             </div>
 
