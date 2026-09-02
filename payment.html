@@ -33,6 +33,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
   <link rel="stylesheet" href="css/main.css" />
   <style>
+	  .success-item span {
+  display: block;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+}
     main {
       display: flex;
       flex-direction: row;
@@ -609,16 +615,20 @@
           <p style="color: #555; margin-bottom: 0;">Your course enrollment has been confirmed successfully.</p>
 
           <div class="success-grid">
-            <div class="success-item"><strong>Course name</strong><span id="successCourseName">Full-Stack Web Development</span></div>
-            <div class="success-item"><strong>Course ID</strong><span id="successCourseId">CRS-web-development</span></div>
-            <div class="success-item"><strong>Student ID</strong><span id="successStudentId">STU-2026-001</span></div>
-            <div class="success-item"><strong>Faculty name</strong><span id="successFacultyName">Sakshi Verma</span></div>
-            <div class="success-item"><strong>Location</strong><span id="successLocation">Online / Classroom</span></div>
-            <div class="success-item"><strong>Starting date</strong><span id="successStartDate">10 Aug 2026</span></div>
-            <div class="success-item"><strong>Class timing</strong><span id="successTiming">Mon-Wed-Fri, 6pm - 8pm</span></div>
-            <div class="success-item"><strong>Seat number</strong><span id="successSeatNumber">SEAT-42</span></div>
-            <div class="success-item"><strong>Enrollment number</strong><span id="successEnrollmentNumber">ENR-1001</span></div>
-            <div class="success-item"><strong>Payment status</strong><span id="successPaymentStatus">Paid</span></div>
+			  <div class="success-item">
+  <strong>Student Name</strong>
+  <span id="successStudentName"></span>
+</div>
+            <div class="success-item"><strong>Course name</strong><span id="successCourseName"></span></div>
+            <div class="success-item"><strong>Course ID</strong><span id="successCourseId"></span></div>
+            <div class="success-item"><strong>Student ID</strong><span id="successStudentId"></span></div>
+            <div class="success-item"><strong>Faculty name</strong><span id="successFacultyName"></span></div>
+            <div class="success-item"><strong>Location</strong><span id="successLocation"></span></div>
+            <div class="success-item"><strong>Starting date</strong><span id="successStartDate"></span></div>
+            <div class="success-item"><strong>Class timing</strong><span id="successTiming"></span></div>
+            <div class="success-item"><strong>Seat number</strong><span id="successSeatNumber"></span></div>
+            <div class="success-item"><strong>Enrollment number</strong><span id="successEnrollmentNumber"></span></div>
+            <div class="success-item"><strong>Payment status</strong><span id="successPaymentStatus"></span></div>
           </div>
         </div>
       </section>
@@ -716,6 +726,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="js/jquery.nice-select.min.js"></script>
   <script src="js/main.js"></script>
   <script>
+	  
     const studentForm = document.getElementById('studentForm');
     const studentFormSection = document.getElementById('studentFormSection');
     const confirmationSection = document.getElementById('confirmationSection');
@@ -761,9 +772,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       const fullName = document.getElementById('fullName').value.trim();
       const email = document.getElementById('email').value.trim();
       const mobile = document.getElementById('mobile').value.trim();
-      const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'upi';
+      const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
 
+	document.getElementById('successStudentName').textContent =
+  fullName || ;
       document.getElementById('successStudentId').textContent = 'STU-' + Math.floor(1000 + Math.random() * 9000);
+		document.getElementById('successCourseId').textContent =
+  selectedCourse.id;
       document.getElementById('successCourseName').textContent = document.getElementById('confirmCourse').textContent.trim();
       document.getElementById('successFacultyName').textContent = 'Sakshi Verma';
       document.getElementById('successTiming').textContent = 'Mon-Wed-Fri, 6pm - 8pm';
@@ -788,6 +803,90 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         }
       });
     });
+ const courses = {
+  'web-development': {
+    name: 'Full-Stack Web Development',
+    id: 'CRS-web-development',
+    fee: '₹18,999',
+    faculty: 'Sakshi Verma',
+    location: 'Online / Classroom',
+    startingDate: '10 Aug 2026',
+    timing: 'Mon-Wed-Fri, 6pm - 8pm'
+  },
+
+  'data-science': {
+    name: 'Data Science & Analytics',
+    id: 'CRS-data-science',
+    fee: '₹20,499',
+    faculty: 'Dr. Ayesha Khan',
+    location: 'Online / Classroom',
+    startingDate: '12 Aug 2026',
+    timing: 'Tue-Thu, 7pm - 9pm'
+  },
+
+  'cyber-security': {
+    name: 'Cyber Security',
+    id: 'CRS-cyber-security',
+    fee: '₹17,999',
+    faculty: 'Rohit Patel',
+    location: 'Online / Classroom',
+    startingDate: '15 Aug 2026',
+    timing: 'Sat-Sun, 11am - 2pm'
+  },
+
+  'ai-ml-engineering': {
+    name: 'AI & ML Engineering',
+    id: 'CRS-ai-ml-engineering',
+    fee: '₹22,499',
+    faculty: 'Priya Mehta',
+    location: 'Online / Classroom',
+    startingDate: '18 Aug 2026',
+    timing: 'Mon-Wed-Fri, 8pm - 10pm'
+  },
+
+  'ui-ux-design': {
+    name: 'UI/UX Design',
+    id: 'CRS-ui-ux-design',
+    fee: '₹15,999',
+    faculty: 'Sneha Sharma',
+    location: 'Online / Classroom',
+    startingDate: '20 Aug 2026',
+    timing: 'Tue-Thu, 5pm - 7pm'
+  },
+
+  'cloud-computing': {
+    name: 'Cloud Computing',
+    id: 'CRS-cloud-computing',
+    fee: '₹19,499',
+    faculty: 'Neeraj Singh',
+    location: 'Online / Classroom',
+    startingDate: '22 Aug 2026',
+    timing: 'Sat-Sun, 3pm - 6pm'
+  },
+
+  'ios-development': {
+    name: 'iOS Development',
+    id: 'CRS-ios-development',
+    fee: '₹18,499',
+    faculty: 'Ananya Rao',
+    location: 'Online / Classroom',
+    startingDate: '25 Aug 2026',
+    timing: 'Mon-Wed, 6pm - 8pm'
+  },
+
+  'graphic-design': {
+    name: 'Graphic Design',
+    id: 'CRS-graphic-design',
+    fee: '₹12,999',
+    faculty: 'Meera Joshi',
+    location: 'Online / Classroom',
+    startingDate: '28 Aug 2026',
+    timing: 'Fri-Sat, 2pm - 5pm'
+  }
+};
+
+const courseKey = new URLSearchParams(window.location.search).get('course');
+const selectedCourse = courses[courseKey] || courses['web-development'];
   </script>
 </body>
 
