@@ -1,0 +1,215 @@
+
+Notice: session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\Edukate\Edukate\signup.html on line 2
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="img/fav.png" />
+  <meta name="author" content="colorlib" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta charset="UTF-8" />
+  <title>Edukate - Sign Up</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto:400,400i,500,700" rel="stylesheet" />
+  <link rel="stylesheet" href="css/linearicons.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <link rel="stylesheet" href="css/owl.carousel.css" />
+  <link rel="stylesheet" href="css/nice-select.css">
+  <link rel="stylesheet" href="css/hexagons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <header class="default-header">
+        <nav class="navbar navbar-expand-lg  navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <h2 style="color:azure;">Edukate</h2>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        
+                        <li><a  href="faculty.html">Faculty</a> </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                                AI
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="ai.html">Overview</a>
+                                <a class="dropdown-item" href="ai-chatbot.html">Chatbot</a>
+                                <a class="dropdown-item" href="ai-recommendations.html">Recommendations</a>
+                                <a class="dropdown-item" href="ai-quiz.html">Quiz Generator</a>
+                                <a class="dropdown-item" href="ai-notes.html">Note Summary</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                                Blog
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="blog-home.html">Blog Home</a>
+                                <a class="dropdown-item" href="blog-single.html">Blog Details</a>
+                            </div>
+                        </li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <!-- <li><a href="payment.html">Payment</a></li> -->
+                        <li>
+                            <button class="search">
+                                <span class="lnr lnr-magnifier" id="search"></span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="profile.html"  title="Profile">
+                                <span class="lnr lnr-user"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="search-input" id="search-input-box">
+            <div class="container">
+                <form class="d-flex justify-content-between">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search Here" />
+                    <button type="submit" class="btn"></button>
+                    <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+        
+    </header>  <style>
+    /* Hide header search input on signup page */
+    #search-input-box { display: none !important; }
+  </style>
+
+  <section class="auth-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="auth-card">
+            <h2>Create an Account</h2>
+            <p>Join Edukate and start learning with expert-led courses.</p>
+
+            
+            <form class="auth-form" method="post">
+              <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
+              </div>
+              <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+              </div>
+              <button type="submit" class="auth-btn">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+              <p>Already have an account? <a href="signin.html" class="auth-link">Sign In</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- ================ start footer Area ================= -->
+ <footer class="footer-area section-gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Categories</h4>
+					<ul>
+						<li><a href="#">Digital Marketing</a></li>
+						<li><a href="#">Stock Marketing</a></li>
+						<li><a href="#">Programming</a></li>
+						<li><a href="#">Machine Learning</a></li>
+           
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Company</h4>
+					<ul>
+						<li><a href="#">Jobs</a></li>
+						<li><a href="#">Investor Relations</a></li>
+            <li><a href="#">Resume Bulider</a></li>
+						<li><a href="#">Privacy</a></li>
+            <li><a href="#">Sitemap</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Features</h4>
+					<ul>
+						<li><a href="#">Jobs</a></li>
+						<li><a href="#">Brand Assets</a></li>
+						<li><a href="#">Investor Relations</a></li>
+						<li><a href="#">Terms of Service</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="#">Guides</a></li>
+						<li><a href="#">Research</a></li>
+						<li><a href="#">Experts</a></li>
+						<li><a href="#">Agencies</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-4 col-md-6 single-footer-widget">
+					<h4>Newsletter</h4>
+					<p>You can trust us. we only send promo offers,</p>
+					<div class="form-wrap" id="mc_embed_signup">
+						<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+						 method="get" class="form-inline">
+							<input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
+							 required="" type="email">
+							<button class="click-btn btn btn-default text-uppercase">subscribe</button>
+							<div style="position: absolute; left: -5000px;">
+								<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+							</div>
+							<div class="info"></div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+			<div class="footer-bottom row align-items-center">
+				<p class="footer-text m-0 col-lg-8 col-md-12">
+
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">Edukate Teame</a>
+</p>
+				<div class="col-lg-4 col-md-12 footer-social">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-dribbble"></i></a>
+					<a href="#"><i class="fa fa-behance"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <!-- ================ End footer Area ================= --></body>
+</html>

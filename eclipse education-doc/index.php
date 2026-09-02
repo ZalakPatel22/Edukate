@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="no-js"> 
+    <head>
+        <meta charset="utf-8">
+        <title>Edukate </title>
+        <meta name="description" content="">
+		<!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- <link rel="shortcut icon" href="img/favicon.png"> -->
+        
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+        
+        <!-- Syntax Highlighter -->
+        <link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
+        <link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
+		
+		<!-- Font Awesome CSS-->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <!-- Normalize/Reset CSS-->
+		<link rel="stylesheet" href="css/normalize.min.css">
+		<!-- Main CSS-->
+        <link rel="stylesheet" href="css/main.css">
+		
+    </head>
+	
+    <body id="welcome">
+    
+        <aside class="left-sidebar">
+            <div class="logo">
+                <a href="#welcome">
+                    <img src="img/logo.png" alt="">
+                </a>
+            </div>
+            <nav class="left-nav">
+                <ul id="nav">
+                    <li class="current"><a href="#welcome">Welcome</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#tmpl-structure">Structure</a></li>
+                    <li><a href="#css-structure">CSS Files</a></li>
+                    <li><a href="#javascript">JavaScript Libraries</a></li>
+                    <li><a href="#contact-form">Contact Form</a></li>
+                    <li><a href="#subscription-form">Subscription Form</a></li>
+                    <li><a href="#video">Video Tutorial</a></li>
+                    <li><a href="#credit">Source and Credit</a></li>
+                </ul>
+            </nav>
+        </aside>
+		
+		<div id="main-wrapper">
+		    <div class="main-content">
+		        <section id="welcome">
+		            <div class="content-header">
+		                <h1>Edukate</h1>
+		            </div>
+		            <div class="welcome">
+                        <h2 class="twenty">Welcome To Edukate IT Management & Institute </h2>
+
+                        <p>Edukate is a comprehensive IT Institute Management System designed to streamline administrative and academic operations.</p>
+
+                        <p>This document covers the installation and use of this theme and often reveals answers to common problems and issues - read this document thoroughly if you are experiencing any difficulties. If you have any questions that are beyond the scope of this document, feel free to email at <code><a href="mailto:support@pixelcoder.net">support@pixelcoder.net</a></code> Thank you so much!</p>
+		            </div>
+		            
+		            <div class="features">
+		                <h2 class="twenty">Template Features</h2>
+		                <ul>
+		                    <li>Clean &amp; Simple Design</li>
+                            <li>HTML5 &amp; CSS3</li>
+                            <li>Fully Responsive Design</li>
+                            <li>PHP/Ajax Powered Working Contact Form</li>
+                            <li>All files are well commented</li>
+                            <li>Cross Browser Compatible with IE11+, Firefox, Safari, Opera, Chrome</li>
+                            <li>Extensive Documentation</li>
+		                </ul>
+		            </div>
+
+		        </section>
+		        
+		        <section id="installation">
+                    <div class="content-header">
+		                <h1>Edukate</h1>
+                    </div>
+		        </section>
+
+
+		        <section id="tmpl-structure">
+		            <h2 class="title">Template Structure</h2>
+		            <p class="fifteen">All information within the main content area is nested within a body tag. The general template structure is pretty the same throughout the template. Here is the general structure of main page (index.html).</p>
+		            <pre class="brush: html">
+		                <header class="site-header">
+		                	
+		                </header>
+
+		                <main class="site-main">
+		                	<section class="section">
+		                		
+		                	</section>
+		                	<section class="section">
+		                		
+		                	</section>
+		                	<section class="section">
+		                		
+		                	</section>
+		                </main>
+
+		                <footer class="site-footer">
+		                	
+		                </footer>
+		            </pre>
+		        </section>
+
+
+		        <section id="css-structure">
+		            <h2 class="title">CSS Files and Structure</h2>
+		            <p class="fifteen">These are the css files that are loaded into templates in <strong>Head Section</strong>.</p>
+		            <pre class="brush: html">
+		                <!--
+						CSS
+						============================================= -->
+						<link rel="stylesheet" href="css/linearicons.css">
+						<link rel="stylesheet" href="css/owl.carousel.css">
+						<link rel="stylesheet" href="css/nice-select.css">
+						<link rel="stylesheet" href="css/font-awesome.min.css">
+						<link rel="stylesheet" href="css/nice-select.css">
+						<link rel="stylesheet" href="css/magnific-popup.css">
+						<link rel="stylesheet" href="css/bootstrap.css">
+						<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
+						<link rel="stylesheet" href="css/main.css">
+					</pre>
+		            
+		            <h2 class="title">Google Web Fonts</h2>
+		            
+		            <p>By default, the template loads this font from Google Web Font Services, you can change the font with the one that suits you best.</p>
+		            
+		            <pre class="brush:html">		                
+						<!--
+						Google Font
+						=========================== -->
+		                <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto:400,400i,500,700" rel="stylesheet"> 
+		            </pre>
+		            
+		            <p class="twenty">Remember to change the font into <strong>main.css</strong></p>
+		        </section>
+		        
+		        <section id="javascript">
+		            <h2 class="title">Javascript Files and Structure</h2>
+		            
+		            <p class="fifteen">
+						Edukate serves as a robust platform for managing students, courses, enrollments, payments, and faculty, ensuring a seamless educational experience for both administrators and learners
+					</p>
+
+		            
+		            <pre class="brush: html">
+				        <!--
+						JavaScripts
+						========================== -->
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+						<script src="js/vendor/bootstrap.min.js"></script>
+						<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+						<script src="js/jquery.ajaxchimp.min.js"></script>
+						<script src="js/jquery.magnific-popup.min.js"></script>
+						<script src="js/parallax.min.js"></script>
+						<script src="js/owl.carousel.min.js"></script>
+						<script src="js/jquery.sticky.js"></script>
+						<script src="js/hexagons.min.js"></script>
+						<script src="js/jquery.counterup.min.js"></script>
+						<script src="js/waypoints.min.js"></script>
+						<script src="js/jquery.nice-select.min.js"></script>
+						<script src="js/main.js"></script>
+		            </pre>
+		        </section>
+		        
+		        <section id="contact-form">
+		            <h2 class="title"> Contact Form </h2>
+		            <p>This is a PHP Script for sending messages to your email, you should replace <strong>support@pixelcoder.net</strong> to your email to start receive messages.</p>
+		            <pre class="brush:php">
+	                    $to = 'demo@spondonit.com'; // replace this mail with yours
+					    $firstname = $_POST["fname"];
+					    $email= $_POST["email"];
+					    $headers = 'MIME-Version: 1.0' . "\r\n";
+					    $headers .= "From: " . $email . "\r\n"; // Sender's E-mail
+					    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+					    $message ='<table style="width:100%">
+					        <tr>
+					            <td>'.$firstname.'  '.$laststname.'</td>
+					        </tr>
+					        <tr><td>Email: '.$email.'</td></tr>
+					    </table>';
+
+					    if (@mail($to, $email, $message, $headers))
+					    {
+					        echo 'The message has been sent.';
+					    }else{
+					        echo 'failed';
+					    }
+		            </pre>		            
+		        </section>
+		        <section id="subscription-form">
+		            <h2 class="title"> Subscription Form </h2>
+		            <p>Replace this action with your own mailchimp post URL. Don't remove the "". Just paste the url inside "".</p>
+		            <pre class="brush: javascript">
+				        <div id="mc_embed_signup">
+				        	//Replace this action with your own mailchimp post URL. Don't remove the "". Just paste the url inside "".
+				        	<form target="_blank" novalidate action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&id=92a4423d01" method="get" class="subscription relative d-flex justify-content-center"></form>
+				        </div>
+		            </pre>		            
+		        </section>
+		        <section id="video">
+		        	<h2 class="title"> Video Tutorial </h2>
+		        	<!-- 21:9 aspect ratio -->
+					<div class="embed-responsive embed-responsive-21by9">
+					  <iframe class="embed-responsive-item" width="100%" height="515" src="https://www.youtube.com/embed/i7_PRPLOxVE?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+					</div>	            
+		        </section>
+		        <section id="credit">
+		            <h2 class="title">Source and Credit</h2>		            
+		            <div class="script-source">
+		                <ul>
+		                    <li><a target="_blank" href="http://www.pexels.com">Pexels</a></li>
+		                    <li><a target="_blank" href="http://jquery.com/">jQuery</a></li>
+		                    <li><a target="_blank" href="http://getbootstrap.com">Bootstrap Framework</a></li>
+		                    <li><a target="_blank" href="http://www.owlgraphic.com/owlcarousel">Owl Carousel</a></li>
+		                    <li><a target="_blank" href="https://github.com/iamMonzurul/jQuery-AJAX-MailChimp">Ajax Mailchimp</a></li>
+		                    <li><a target="_blank" href="http://fontawesome.io/">FontAwesome</a></li>
+		                    <li><a target="_blank" href="http://dimsemenov.com/plugins/magnific-popup/">Magnefic Pop Up</a></li>
+		                    <li><a target="_blank" href="http://hernansartorio.com/jquery-nice-select/">Nice Select</a></li>
+		                    <li><a target="_blank" href="https://linearicons.com/">Linear Icons</a></li>
+		                </ul>
+		            </div>
+		        </section>
+		    </div>
+		</div>
+		
+		
+		<!-- Essential JavaScript Libraries
+		==============================================-->
+        <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.nav.js"></script>
+        <script type="text/javascript" src="syntax-highlighter/scripts/shCore.js"></script> 
+        <script type="text/javascript" src="syntax-highlighter/scripts/shBrushXml.js"></script> 
+        <script type="text/javascript" src="syntax-highlighter/scripts/shBrushCss.js"></script> 
+        <script type="text/javascript" src="syntax-highlighter/scripts/shBrushJScript.js"></script> 
+        <script type="text/javascript" src="syntax-highlighter/scripts/shBrushPhp.js"></script> 
+        <script type="text/javascript">
+            SyntaxHighlighter.all()
+        </script>
+        <script type="text/javascript" src="js/custom.js"></script>
+		
+    </body>
+</html>
